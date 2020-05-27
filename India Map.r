@@ -1,3 +1,6 @@
+#-----------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------
 library(tidyverse)
 library(sf)
 library(RColorBrewer)
@@ -5,8 +8,32 @@ library(ggrepel)
 library(gridExtra)
 library(grid)
 
-india <- st_read("/mnt/ddd/Team E/Sample Frames/India/INDIA_2018_DISTRICTS-master/DISTRICTS_2018.shp")
+#-----------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------
 
+#
+temp <- tempdir()
+
+
+download.file(url = 'https://github.com/justinelliotmeyers/INDIA_2018_DISTRICTS.git',destfile = paste0(temp,'/IndiaDis.zip'))
+
+# unzip the .zip file
+unzip(zipfile = paste0(temp,'/IndiaDis.zip'))
+
+india <- st_read("DISTRICTS_2018.shp")
+
+
+plain_map <- function(){
+  
+  theme(legend.position = "none", plot.background = element_rect(fill = "white",
+      colour = "white"), panel.grid.major = element_line(colour = "transparent"),
+      panel.grid.minor = element_blank(), panel.border = element_blank(),
+      panel.background = element_blank(), axis.title.y = element_blank(),
+      axis.title.x = element_blank(), axis.ticks = element_blank(),
+      axis.text = element_blank(), legend.title = element_blank(),
+      legend.text = element_text(size = 12))
+}
 
 
 indstate <- india %>%
